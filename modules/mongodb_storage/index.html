@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Key-value: mongodb_storage - MongoDB for Drupal</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Key-value: mongodb_storage";
+    var mkdocs_page_input_path = "modules/mongodb_storage.md";
+    var mkdocs_page_url = "/modules/mongodb_storage/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> MongoDB for Drupal</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../install/">Installation</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../layout/">Layout</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Modules</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../mongodb/">Driver: mongodb</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">Key-value: mongodb_storage</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#key-value-mongodb_storage">Key-value: mongodb_storage</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#configuration">Configuration</a></li>
+        
+            <li><a class="toctree-l4" href="#command">Command</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../mongodb_watchdog/">Logger: mongodb_watchdog</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Development</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../bespoke/">Bespoke code</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../tests/">Tests</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">MongoDB for Drupal</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Modules &raquo;</li>
+        
+      
+    
+    <li>Key-value: mongodb_storage</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/FGM/mongodb/edit/master/docs/modules/mongodb_storage.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="key-value-mongodb_storage">Key-value: <code>mongodb_storage</code></h1>
+<p>The <code>mongodb_storage</code> module implements the <a href="https://en.wikipedia.org/wiki/Key-value_database">Key-Value storage</a>
+for Drupal in MongoDB.</p>
+<h2 id="configuration">Configuration</h2>
+<p>To use the MongoDB Key-Value (Expirable) storage:</p>
+<ul>
+<li>ensure there is a <code>keyvalue</code> database alias as in
+  <a href="../../../install#settings-configuration">settings configuration</a>.</li>
+<li>
+<p>declare MongoDB as the default Key-Value storage implementation by editing
+  the existing declarations in the <code>sites/default/services.yml</code> file:</p>
+<pre><code># In sites/default/services.yml.
+factory.keyvalue:
+  default: keyvalue.mongodb
+factory.keyvalue.expirable:
+  keyvalue_expirable_default: keyvalue.expirable.mongodb
+</code></pre>
+</li>
+<li>
+<p>enable the module, e.g. using <code>drush en mongodb_storage</code>.</p>
+</li>
+<li>
+<p>import the existing Key-Value contents from the database, using the Drush
+  or Console <code>mongodb:storage:import_keyvalue</code> command: <code>drush most-ikv</code>. 
+  It will output the names of the imported stores, for your information:</p>
+<pre><code>  key_value
+  key_value_expire
+</code></pre>
+</li>
+<li>
+<p>rebuild the container to take these changes into account using <code>drush cr</code>.</p>
+</li>
+</ul>
+<h2 id="command">Command</h2>
+<p>The module provides one single command to import the content of the default SQL
+storage for Key-Value into MongoDB. The command is available for Drush and 
+Drupal Console indifferently, and is described in the previous paragraph as part
+of the configuration steps.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../mongodb_watchdog/" class="btn btn-neutral float-right" title="Logger: mongodb_watchdog">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../mongodb/" class="btn btn-neutral" title="Driver: mongodb"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/FGM/mongodb/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../mongodb/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../mongodb_watchdog/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/require.js"></script>
+      <script src="../../search/search.js"></script>
+
+</body>
+</html>

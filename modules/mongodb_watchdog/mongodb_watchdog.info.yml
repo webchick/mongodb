@@ -1,8 +1,0 @@
-core: '8.x'
-dependencies:
-  - mongodb:mongodb
-description: 'A logger (watchdog) implementation using MongoDB'
-name: 'MongoDB watchdog'
-package: 'MongoDB'
-php: '7.x'
-type: 'module'

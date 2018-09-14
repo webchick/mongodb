@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Logger: mongodb_watchdog - MongoDB for Drupal</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Logger: mongodb_watchdog";
+    var mkdocs_page_input_path = "modules/mongodb_watchdog.md";
+    var mkdocs_page_url = "/modules/mongodb_watchdog/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> MongoDB for Drupal</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../install/">Installation</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../layout/">Layout</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Modules</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../mongodb/">Driver: mongodb</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../mongodb_storage/">Key-value: mongodb_storage</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">Logger: mongodb_watchdog</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#logger-mongodb_watchdog">Logger: mongodb_watchdog</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#configuration">Configuration</a></li>
+        
+            <li><a class="toctree-l4" href="#troubleshooting-command">Troubleshooting command</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Development</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../bespoke/">Bespoke code</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../tests/">Tests</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">MongoDB for Drupal</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Modules &raquo;</li>
+        
+      
+    
+    <li>Logger: mongodb_watchdog</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/FGM/mongodb/edit/master/docs/modules/mongodb_watchdog.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="logger-mongodb_watchdog">Logger: <code>mongodb_watchdog</code></h1>
+<p>The <code>mongodb_watchdog</code> module stores the log entries for your Drupal site
+in MongoDB collections as mentioned in
+<a href="../../../install#settings-configuration">Settings Configuration</a></p>
+<p>This module uses a separate database, defined by the <code>logger</code> database alias in
+settings. Do NOT point that alias to the same database as <code>default</code>, because the
+module Drops the <code>logger</code> database when uninstalling, which would drop all your
+other data with it.</p>
+<h2 id="configuration">Configuration</h2>
+<p>Below are the configurable items available in <code>mongodb_watchdog.settings</code></p>
+<ul>
+<li><code>mongodb.watchdog.items</code><ul>
+<li>the maximum item limit on the capped collection used by the module.</li>
+<li>if not defined, it defaults to 10000.</li>
+<li>the actual (size-based) limit is derived from this value, assuming
+  1&nbsp;<a href="https://en.wikipedia.org/wiki/Kibibyte">kiB</a> per watchdog entry.</li>
+</ul>
+</li>
+<li><code>mongodb.watchdog.limit</code><ul>
+<li>the maximum severity level (0 to 7, per RFC 5424) to save into the logger
+  storage.</li>
+<li>events below this level (with a higher numerical level) will be ignored by
+  the module.</li>
+<li>if not defined, all events will saved.</li>
+</ul>
+</li>
+<li><code>mongodb.watchdog.items_per_page</code><ul>
+<li>the maximum number of events displayed on the event details page.</li>
+</ul>
+</li>
+<li><code>mongodb_watchdog.request_tracking</code><ul>
+<li>if true, enable the per-request event tracking.</li>
+<li>if not defined, it defaults to false because its cost is not entirely
+  negligible.</li>
+<li>this feature requires the use of <code>mod_unique_id</code> in Apache 2.x</li>
+</ul>
+</li>
+<li><code>mongodb_watchdog.requests</code><ul>
+<li>if request tracking is enabled, this setting defines the maximum requests
+  limit on the capped collection used by the module.</li>
+<li>if not defined, it defaults to 100000.</li>
+<li>the actual (size-based) limit is derived from this variable, assuming
+  1&nbsp;<a href="https://en.wikipedia.org/wiki/Kibibyte">kiB</a> per tracker entry.</li>
+</ul>
+</li>
+</ul>
+<p>See <code>Drupal\Core\Logger\RfcLogLevel</code> and <code>Psr\Log\LogLevel</code> for further
+information about severity levels.</p>
+<h2 id="troubleshooting-command">Troubleshooting command</h2>
+<p>The module provides one single command designed to help troubleshoot issues with
+logging when this module is enabled. It is available for Drush and Drupal
+Console indifferently.</p>
+<p>The command takes no arguments and returns an analysis of the logger collections
+which needs to be interpreted.</p>
+<pre><code>$ drush mongodb:watchdog:sanitycheck
+0: 0
+1: 2
+1000: 1
+2000: 0
+3000: 0
+4000: 0
+5000: 0
+6000: 0
+7000: 0
+8000: 0
+9000: 0
+9999: 0
+10000: 0
+$
+</code></pre>
+<p>What the output of this command represents is the number of <code>watchdog_event_*</code>
+collections with a document count in the range specified as the key.</p>
+<p>In the results, the first and last two entries are specific: they match exact
+counts, while the others are intervals, so the actual buckets are: <code>0</code>, <code>1</code>,
+<code>2..1000</code>, <code>1001..2000</code>, ..., <code>9001..9998</code>, <code>9999</code>, <code>10000</code>. The specific
+value 10000 is the number of entries allowed in event collections, as these are
+MongoDB capped collections: whatever its value <code>n</code>, the command will report 
+<code>0</code>, <code>1</code>, <code>n-1</code>, <code>n</code>, and 9 ranges in between.</p>
+<h3 id="interpreting-the-results">Interpreting the results</h3>
+<p>As a general rule, on a high-load site, all buckets should have comparable
+numbers, and the number of events logged grouped by pattern is pseudo-random,
+except for the <code>0</code> bucket, which should be empty.</p>
+<ul>
+<li><code>0</code> bucket non-empty: unless there was specific manipulation performed by
+  hand, this is a bug, and should be reported: event collections are created
+  when an event is created, by the first insertion, and dropped as needed, but
+  never truncated or created without an insert.</li>
+<li><code>1</code> bucket has a high value, possibly orders of magnitude higher than other
+  buckets. This denotes an incorrect use of the Drupal logger system, for which
+  the PSR-3 <code>message</code> parameter is a message template, and the variant part of
+  the message is expressed as placeholder values in the options. Look for calls
+  to log operations passing a variable as the message and replace them by a
+  template containing placeholders for the variable content in the message.</li>
+<li><code>n-1</code> bucket has a high value: suspicious situation with the logger,
+  especially if the "n" value is low or 0: please report a possible bug, with
+  accompanying data</li>
+<li><code>n</code> bucket has a high value<ul>
+<li><code>n-1</code> has a high value too: this is a mostly  normal situation,
+  especially if the value in the previous bucket is also high, although it
+  means the data rotation in your site is possibly a bit high and you should
+  increase the size of the capped collections to ensure longer retention of
+  data.</li>
+<li><code>n-1</code> has a low or 0 value: your logs are saturated by the site, and you
+  are losing information, as all the capped collections in that situation
+  are rolling over constantly. Ensure you have enough storage and raise the
+  value capped collection size.</li>
+<li>The config value to change in these cases is <code>mongodb.watchdog.items</code>.</li>
+</ul>
+</li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../bespoke/" class="btn btn-neutral float-right" title="Bespoke code">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../mongodb_storage/" class="btn btn-neutral" title="Key-value: mongodb_storage"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/FGM/mongodb/" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../mongodb_storage/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../bespoke/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/require.js"></script>
+      <script src="../../search/search.js"></script>
+
+</body>
+</html>

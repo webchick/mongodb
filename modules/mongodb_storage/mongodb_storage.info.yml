@@ -1,8 +1,0 @@
-core: '8.x'
-dependencies:
-  - mongodb:mongodb
-description: 'Key-Value storage using MongoDB'
-name: 'MongoDB Storage'
-package: 'MongoDB'
-php: '7.x'
-type: 'module'
