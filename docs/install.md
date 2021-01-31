@@ -10,7 +10,7 @@ guide assumes that :
   10.x.
 * The [mongodb][mongodb] (not [mongo][mongo]) PHP extension version 1.7 or
   later is installed and configured.
-* PHP is version 7.3.x to 8.0.x. PHP 8.0.x should work but is not tested: be sure
+* PHP is version 7.4.x to 8.0.x. PHP 8.0.x should work but is not tested: be sure
   to [report any issue][report] you could have with it.
 * We recommend [using Composer](#installing-using-composer) for installing this
   module.
@@ -93,7 +93,7 @@ $settings['mongodb'] = [
     * The `logger` database alias will store logger collections on the same
       `default` MongoDB server, but in a separate `logger` database.
     * The `queue` database alias will store queue collections on the same
-          `default` MongoDB server, but in a separate `queue` database. 
+          `default` MongoDB server, but in a separate `queue` database.
 
 The module contains an example default implementation of these settings, which
 you can copy or include, in `mongodb/example.settings.local.php`.
