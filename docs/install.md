@@ -24,6 +24,8 @@ maintained by MongoDB Inc.:
    * [MongoDB LINUX installation][MongoDBLinux]
    * [MongoDB Windows installation][MongoDBWindows]
 
+Alternately, avoid all of that hassle and use [MongoDB Atlas Free Tier](https://www.mongodb.com/docs/atlas/tutorial/deploy-free-tier-cluster/).
+
 MongoDB below 4.0 is no longer supported, which means you can no longer get
 a basic web admin interface by running `mongod` with the `–httpinterface`: that
 feature was [removed in 3.6][removedhttp]. To some extent, it has been superseded
