@@ -9,7 +9,7 @@ guide assumes that :
 * The site will be running [Drupal][drupal] 8.9.x or 9.x.y, with [Drush][drush]
   10.x.
 * The [mongodb][mongodb] (not [mongo][mongo]) PHP extension version 1.7 or
-  later is installed and configured.
+  later is installed and configured. MongoDB has a [tutorial](https://www.mongodb.com/developer/languages/php/php-setup/#installing-the-php-extension) that can get you up and running on Mac OS X.
 * PHP is version 7.3.x to 8.0.x. PHP 8.0.x should work but is not tested: be sure
   to [report any issue][report] you could have with it.
 * We recommend [using Composer](#installing-using-composer) for installing this
