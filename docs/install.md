@@ -49,7 +49,7 @@ by the [free monitoring][freemonitoring] service offered by MongoDB Inc.
 ## Settings Configuration
 
 * Download the module package, as per
-  [Installing contributed modules (Drupal 8/9)][install]
+  [Installing contributed modules (Drupal 8/9)](https://www.drupal.org/docs/extending-drupal/installing-modules#s-add-a-module-with-composer)
 * Copy the relevant section from `mongodb/example.settings.local.php` to your
   `settings.local.php` file if you use one, or `settings.php` otherwise,
   and adapt it to match your MongoDB settings. These settings are used by the
